@@ -1,0 +1,81 @@
+
+.card {
+    
+    background: linear-gradient(to top, #11998e, #38ef7d);
+    background-color: var(--bg-color);
+    padding: 1.5rem 2rem;
+    border-radius: 1.25rem;
+    text-align: right; 
+    max-width: 400px;
+    
+    
+    position: absolute; 
+    bottom: -1380px; 
+    right: 0; 
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 20px;
+}
+
+
+.loader {
+    color: rgb(124, 124, 124);
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    direction: rtl; 
+}
+
+.static-word {
+    color: #fff;
+    font-weight: bold;
+    margin: 0;
+}
+
+.words {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    height: 1.5em;
+}
+
+.words::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        var(--bg-color) 10%,
+        transparent 30%,
+        transparent 70%,
+        var(--bg-color) 90%
+    );
+    z-index: 20;
+}
+
+.word {
+    display: block;
+    color: #4c0ede;
+    animation: spin_4991 5s infinite;
+    direction: rtl;
+}
+
+@keyframes spin_4991 {
+    0% {
+        transform: translateY(0%);
+    }
+    25% {
+        transform: translateY(-100%);
+    }
+    50% {
+        transform: translateY(-200%);
+    }
+    75% {
+        transform: translateY(-300%);
+    }
+    105% {
+        transform: translateY(-400%);
+    }
+}

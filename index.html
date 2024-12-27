@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.com/libraries/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/icon.ico" type="image/x-icon"/>
+    <title>من زميلك</title>
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+    <meta name="title" content="من زميلك">
+    <meta property="og:title" content="من زميلك" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="styleinfo.css">
+    <link rel="stylesheet" href="stylewords.css">
+    <link rel="stylesheet" href= "arrows.css">
+    <!-- <link rel="stylesheet" href="leftstyle.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* تحسين قسم عنا */
+        .about-section {
+            background: linear-gradient(to right, #38ef7d, #11998e);
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 10px;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-section:hover {
+            background: linear-gradient(to right, #11998e, #38ef7d);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+            transition: background 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
+        }
+
+
+        .ourvision:hover{
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        transform: scale(1.05);
+        transition: background 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
+        }
+
+        .ourvision img:hover {
+        transform: scale(1.05);
+        transition: transform 1s ease;
+        }
+
+        /* .lime-circle {
+            width: 20px;
+            height: 20px;
+            background-color: lime;
+            border-radius: 50%;
+            position: absolute;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.05s linear;
+        } */
+
+        .about-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .about-section p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .about-section .highlight {
+            color: #ffeb3b;
+            font-weight: bold;
+        }
+
+        .about-section img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    
+        /* Rest of your slider styles... */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #38ef7d);
+            color: #333;
+        }
+
+        /* Slider Section */
+        .slider {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            position: relative;
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .slide-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .slide-content p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .slider-buttons {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .slider-buttons button {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 18px;
+        }
+
+        .slider-buttons button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .slider-buttons button{
+            border-radius: 12px;
+            background-color: rgba(42, 48, 46, 0.09);
+            border: 2px solid #555555;
+            /* color: white; */
+            /* padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer; */
+        }
+
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .ourvision {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border-radius: 15px;
+            padding: 50px;
+            color: #fff;
+            text-align: center;
+            margin: 50px auto;
+            max-width: 800px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        }
+
+        .ourvision.visible {
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 1.5s ease-out, slideIn 1.5s ease-out;
+        }
+
+        .ourvision h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .ourvision h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: #ffeb3b;
+            border-radius: 2px;
+        }
+
+        .ourvision p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .ourvision img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .ourvision img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+    
+
+    /* @media only screen and (max-width: 400px) {
+    body { 
+        font-size: 49%;
+
+     max-height: auto;
+    max-width: auto; 
+} */
+
+
+    </style>
+</head>
+<body class="sticky-header rtl" data-spy="scroll" data-target="#main-nav-collapse">
+
+    
+    <header>
+        <a  href="#الرئيسية" class="logo">الرئيسية</a>
+        <button class="hamburger">
+            <div class="bar"></div>
+    
+        </button>
+        <nav class="navigation">
+            <!-- <a href="#level">المرحلة</a>
+            <a href="#about">عنا</a>
+            <a href="#ourvision">رؤيتنا</a> -->
+            <a href="#login">سجل مجانا</a>
+            <a href="#about">عنا</a>
+            <a href="#ourvision">رؤيتنا</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle">المراحل</a>
+                <ul class="dropdown-menu">
+                    <li><a href="lessons/grade1.html">الأول الثانوي</a></li>
+                    <li><a href="lessons/grade2.html">الثاني الثانوي</a></li>
+                    <li><a href="lessons/grade3.html">الثالث الثانوي</a></li>
+                </ul>
+            </div>
+        
+            
+        <!-- <button id="dark-mode-toggle" class="dark-mode-btn">الوضع الداكن</button> -->
+        <a href="index.html"> <span class="icon"><img src="images/icon.ico" alt="111" width="40" height="40" style="transform: translate(-60px,7px);"></span></a>
+
+        </nav>
+
+    </header>
+
+    <!-- <nav class="mobile-nav">
+        <a href="#level" class="mobile-navB">المرحلة</a>
+        <a href="#login" class="mobile-navB">سجل مجانا</a>
+        <a href="account" class="mobile-navB">حسابي</a>
+        <a href="#about" class="mobile-navB">عنا</a>
+        <a href="#ourvision" class="mobile-navB">رؤيتنا</a>
+    </nav> -->
+
+
+    <nav class="mobile-nav">
+        <a href="#login" class="mobile-navB">سجل مجانا</a>
+        <a href="#about" class="mobile-navB">عنا</a>
+        <a href="#ourvision" class="mobile-navB">رؤيتنا</a>
+        <div class="mobile-dropdown">
+            <a href="#" class="mobile-dropdown-toggle">المراحل</a>
+            <ul class="mobile-dropdown-menu">
+                <li><a href="lessons/grade1.html">الأول الثانوي</a></li>
+                <li><a href="lessons/grade2.html">الثاني الثانوي</a></li>
+                <li><a href="lessons/grade3.html">الثالث الثانوي</a></li>
+            </ul>
+        </div>
+    </nav>
+
+</section>
+
+
+<div class="slider">
+    <div class="slides">
+        <!-- Slide 1 -->
+        <div class="slide">
+            <img src="images/ph2.webp" alt="Slide 1" class="slide-image1" >
+            <div class="slide-content">
+                    <section class="main" id="الرئيسية">
+                        <div>
+                            <h2>مرحبا بك في<br><span>منصة من زميلك</span></h2>
+                            <h3>اول منصة عربية فالعالم تعمل بنظام</h3>
+                            <h3 class="ba">(شرح الطلاب للدروس)</h3>
+                            <a href="#login" class="main-btn">ابدأ رحلتك</a>
+                            <!-- <div class="social-icons"> -->
+                                <!-- <a target="_blank" href="https://www.tiktok.com/" class="Icon"><i class="fa-brands fa-tiktok"></i></a>
+                                <a target="_blank" href="https://www.instagram.com/" class="Icon"><i class="fa-brands fa-instagram"></i></a>
+                                <a target="_blank" href="https://www.youtube.com/" class="Icon"><i class="fa-brands fa-youtube"></i></a> -->
+                            <!-- </div> -->
+                        </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide">
+                <img src="images/ph00.jpg" alt="Slide 2" class="slide-image2">
+                <div class="slide-content1">
+                    <h2>افضل وسيلة لحفظ المعلومة هي شرحها</h1>
+                    <p><strong>اشرحها لزميلك تفيد وتستفيد</strong></p>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide">
+                <img src="images/ph1.jpeg" alt="Slide 3" class="slide-image3">
+                <div class="slide-content1">
+                <h2> طريقة جديدة للتعلم ممتعة</h1>
+                <p>اتعلم وعلم غيرك</p>
+                </div>
+            </div>
+        </div>
+        <div class="slider-buttons">
+            <!-- <button >Prev</button> -->
+            <div class="left-arrow" id="prev"></div>
+            <div class="right-arrow" id="next"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const visionSection = document.querySelector('.ourvision');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // visionSection.classList.remove('visible'); // Remove and re-add class to restart animation
+                        void visionSection.offsetWidth; // Trigger reflow
+                        visionSection.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            observer.observe(visionSection);
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            const aboutSection = document.querySelector('.about-section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        aboutSection.classList.add('visible');
+                    }
+                });
+            });
+            observer.observe(aboutSection);
+
+            // Add lime circle follow effect
+            const limeCircle = document.createElement('div');
+            limeCircle.classList.add('lime-circle');
+            aboutSection.appendChild(limeCircle);
+
+            aboutSection.addEventListener('mousemove', (event) => {
+                const rect = aboutSection.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                limeCircle.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+
+    
+
+
+
+    </script>
+
+
+
+
+  
+    
+    
+    
+    <script>
+        const slides = document.querySelector('.slides');
+        const slide = document.querySelectorAll('.slide');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            if (index < 0) {
+                currentIndex = slide.length - 1;
+            } else if (index >= slide.length) {
+                currentIndex = 0;
+            } else {
+                currentIndex = index;
+            }
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        prev.addEventListener('click', () => {
+            showSlide(currentIndex - 1);
+        });
+
+        next.addEventListener('click', () => {
+            showSlide(currentIndex + 1);
+        });
+
+        // Optional: Auto-slide every 6 seconds
+        setInterval(() => {
+            showSlide(currentIndex + 1);
+        }, 6000);
+    </script>
+        <!-- Scrollable Page Content -->
+        <div class="content">
+        </div>
+
+
+
+
+        <!-- <section class="about" id="about">
+            <h2 class="title">عنا :</h2>
+            <p class="about">منصة من زميلك هي منصة تعليمية تعتمد علي نظام شرح الطلاب للدروس وهي الاولي من نوعها في العالم العربي نهدف لرفع جودة التعليم عن طريق تحويل عملية التعليم المملة لعملية صناعة محتوى ممتعة</p>
+        </p>
+    </section> -->
+
+
+    
+    <br>
+    <b>
+        </b>
+        
+        <section class="about-section" id="about">
+            <h2>عنا</h2>
+            <p>منصة <span class="highlight">من زميلك</span> هي أول منصة تعليمية عربية تعتمد على نظام شرح الطلاب للدروس.</p>
+            <p>نهدف إلى <span class="highlight">تحويل عملية التعلم</span> من تجربة تقليدية إلى رحلة ممتعة من خلال مشاركة المعرفة بين الطلاب.</p>
+            <img src="images/learn.jpg" alt="صورة تعبيرية عن التعليم">
+        </section>
+
+
+
+        
+
+        <!-- <section class="Ourvision" id="ourvision">
+            <h2 class="title">: رؤيتنا</h2>
+            <p class="content">تطوير التعليم العربي وجعله افضل من خلال تطبيق نظام شرح الطلاب للدروس</p>
+        </p> -->
+
+        <section class="ourvision" id="ourvision">
+            <h2>رؤيتنا</h2>
+            <p>نهدف إلى خلق بيئة تعليمية مبتكرة تُمكّن الطلاب من مشاركة المعرفة وتعزيز الفهم المشترك من خلال أساليب تعليمية تفاعلية.</p>
+            <img src="images/vision.jpg" alt="رؤية تعليمية تعبيرية">
+        </section>
+        
+
+    <section class="Contact" id="Contact">
+        
+        <h2 class="title"><link rel="stylesheet" href="styleexplore.css">
+            <button class="button">
+                <svg class="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path></svg>
+               أفضل مكان للتعلم
+             </button></h2>
+        
+        <footer class="footer">
+        <p class="footer-title">Copyrights @ <span>YoussefGeorgeMotawadea</span></p>
+        <!-- <div class="social-icons">
+            <a target="_blank" href="https://www.youtube.com/c/Sop_dev" class="Icon"><i class="fa-brands fa-youtube"></i></a>
+            <a target="_blank" href="https://www.tiktok.com/@sop.dev" class="Icon"><i class="fa-brands fa-tiktok"></i></a>
+            <a target="_blank" href="https://www.instagram.com/sop.dev/" class="Icon"><i class="fa-brands fa-instagram"></i></a>
+            <a target="_blank" href="https://discord.gg/7zcaPjtpJb" class="Icon"><i class="fa-brands fa-discord"></i></a>
+            
+        </div> -->
+
+    </footer>
+
+    
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+        const menu_btn = document.querySelector('.hamburger');
+        const mobile_menu = document.querySelector('.mobile-nav');
+        
+        
+        
+        menu_btn.addEventListener('click', function () {
+            menu_btn.classList.toggle('is-active')
+            mobile_menu.classList.toggle('is-active')
+        })
+        
+        document.querySelectorAll('.mobile-navB').forEach(item => {
+            item.addEventListener('click', event => {
+                menu_btn.classList.toggle('is-active')
+                mobile_menu.classList.toggle('is-active')
+            })
+        })
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+        const dropdownToggle = document.querySelector('.dropdown-toggle');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        dropdownToggle.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent default link behavior
+            dropdownMenu.classList.toggle('show'); // Toggle the menu
+        });
+
+        // Close the dropdown if clicked outside
+        document.addEventListener('click', function (e) {
+            if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
+    });
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Dropdown Toggle
+            const mobileDropdownToggle = document.querySelector('.mobile-dropdown-toggle');
+            const mobileDropdownMenu = document.querySelector('.mobile-dropdown-menu');
+
+            mobileDropdownToggle.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default link behavior
+                mobileDropdownMenu.classList.toggle('show'); // Toggle dropdown
+            });
+
+            // Close dropdown if clicked outside
+            document.addEventListener('click', function (e) {
+                if (!mobileDropdownToggle.contains(e.target) && !mobileDropdownMenu.contains(e.target)) {
+                    mobileDropdownMenu.classList.remove('show');
+                }
+            });
+        });
+
+
+    </script>
+    
+    <div class="tooltip-container">
+        <button class="tooltip-button">
+          <div class="tooltip-button-bg"></div>
+          <span class="tooltip-button-content">
+            <svg
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              fill="none"
+              class="icon"
+            >
+              <path
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke-width="2"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+              ></path>
+            </svg>
+           😊😊 نسخة تجريبية 
+          </span>
+        </button>
+    <div class="tooltip-content">
+      <div class="tooltip-box">
+        <div class="tooltip-header">
+          <div class="tooltip-icon">
+            <svg
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="tooltip-icon-svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="tooltip-title">معلومة هامة</h3>
+        </div>
+        <div class="tooltip-body">
+          <p>
+            هذا الموقع هو نسخة تجريبية اولى 
+          </p>
+          <div class="tooltip-footer">
+            <svg viewBox="0 0 20 20" fill="currentColor" class="tooltip-check-icon">
+              <path
+                clip-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+            <span>تحت التطوير</span>
+          </div>
+        </div>
+        <div class="tooltip-bg-blur"></div>
+        <div class="tooltip-arrow"></div>
+      </div>
+    </div>
+    </div>
+
+
+
+
+
+    <div class="container">
+        <!-- Main content of the page -->
+        <!-- <div class="content">
+            <p>Page content goes here...</p>
+            <p>Additional content...</p>
+        </div> -->
+    
+        <!-- Card at the bottom-right -->
+        <div class="card">
+            <div class="loader">
+                <p class="static-word">منصة</p>
+                <div class="words">
+                    <span class="word">للعلم</span>
+                    <span class="word">للمتعة</span>
+                    <span class="word">للتحدي</span>
+                    <span class="word">للافادة</span>
+                    <span class="word">كل هذا في مكان واحد</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+</body>
+</html>
